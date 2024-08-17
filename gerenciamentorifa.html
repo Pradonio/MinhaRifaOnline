@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Rifa</title>
+    <link rel="stylesheet" href="style.css"> <!-- Adicione seu CSS aqui -->
+    <script type="module" src="firebase-config.js"></script>
+    <script type="module" src="gerenciamentorifa.js" defer></script> <!-- Inclui o gerenciamentorifa.js -->
+</head>
+<body>
+    <h1>Gerenciar Rifa</h1>
+    <div id="raffleDetails">
+        <!-- Os detalhes da rifa serão inseridos aqui -->
+    </div><br>
+    
+    <h2>Números Disponíveis</h2>
+    <ul id="numbersGrid" class="numbers-grid">
+        <!-- Os números da rifa serão inseridos aqui -->
+    </ul><br>
+
+    <h2>Reservas (Ordem Numérica)</h2>
+    <ul id="reservationsListByNumber">
+        <!-- Lista de reservas em ordem numérica será inserida aqui -->
+    </ul><br>
+
+    <h2>Reservas (Ordem de Data/Hora)</h2>
+    <ul id="reservationsListByDate">
+        <!-- Lista de reservas em ordem de data/hora será inserida aqui -->
+    </ul><br>
+
+    <h2>Arrecadação</h2>
+    <p id="estimatedEarningsLabel">Valor Estimado de Arrecadação: R$ 0,00</p>
+    <p id="currentEarningsLabel">Valor Atual de Arrecadação: R$ 0,00</p><br>
+    
+    <button id="openRaffleBtn">ABRIR RIFA/MARCAR NUMERO</button>
+    <button id="drawBtn">Sortear</button> <!-- Adicione este botão -->
+    <button id="backBtn">Voltar</button>
+
+    <div id="reservationForm" style="display: none;">
+        <h3>Aprovar ou Reprovar Reserva</h3>
+        <button id="approveBtn">Aprovar</button>
+        <button id="rejectBtn">Reprovar</button>
+    </div>
+</body>
+</html>

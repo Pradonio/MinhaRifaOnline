@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compartilhar Rifa</title>
+    <link rel="stylesheet" href="compartilhar-rifa.css"> <!-- CSS específico -->
+    <script type="module" src="compartilhar-rifa.js" defer></script> <!-- Script para a lógica da rifa -->
+</head>
+<body>
+    <h1 id="raffleName"></h1>
+    <p id="raffleDescription"></p>
+    <p id="raffleValue"></p>
+    <p id="raffleQuantity"></p>
+
+    <ul id="numbersGrid" class="numbers-grid"></ul> <!-- Grid dos números -->
+
+    <div id="reservationForm" style="display: none;">
+        <input type="text" id="userName" placeholder="Seu nome" />
+        <button id="reserveBtn">Reservar Número</button>
+    </div>
+</body>
+</html>

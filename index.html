@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login e Cadastro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Login</h1>
+    <div id="loginSection">
+        <input type="email" id="loginEmail" placeholder="E-mail" required>
+        <input type="password" id="loginPassword" placeholder="Senha" required>
+        <button id="loginBtn">Login</button>
+        <div class="toggle-link">
+            <span>Não tem uma conta? <a href="#" id="showRegister">Cadastre-se</a></span>
+        </div>
+    </div>
+
+    <div id="registerSection" style="display: none;">
+        <h1>Cadastro</h1>
+        <input type="email" id="registerEmail" placeholder="E-mail" required>
+        <input type="password" id="registerPassword" placeholder="Senha" required>
+        <button id="registerBtn">Cadastrar</button>
+        <div class="toggle-link">
+            <span>Já tem uma conta? <a href="#" id="showLogin">Faça login</a></span>
+        </div>
+    </div>
+
+    <script type="module" src="./script.js" defer></script>
+</body>
+</html>

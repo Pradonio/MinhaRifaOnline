@@ -1,0 +1,127 @@
+/* Estilos gerais */
+body {
+    font-family: Arial, sans-serif; /* Define uma fonte padrão */
+    margin: 0;
+    padding: 20px; /* Espaçamento ao redor do conteúdo */
+    background-color: #f7f7f7; /* Cor de fundo */
+}
+
+/* Container principal */
+.container {
+    max-width: 800px; /* Largura máxima para telas grandes */
+    margin: 0 auto; /* Centraliza o container */
+    padding: 20px; /* Espaçamento interno */
+    background-color: white; /* Cor de fundo do container */
+    border-radius: 8px; /* Arredondar bordas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para profundidade */
+}
+
+/* Títulos */
+h1, h2 {
+    text-align: center; /* Centraliza os títulos */
+    color: #333; /* Cor do texto */
+}
+
+/* Detalhes da rifa */
+#raffleDetails {
+    margin-bottom: 20px; /* Espaçamento inferior */
+    padding: 15px; /* Espaçamento interno */
+    border: 1px solid #ccc; /* Borda ao redor */
+    border-radius: 5px; /* Arredondar bordas */
+    background-color: #f9f9f9; /* Cor de fundo dos detalhes */
+}
+
+/* Estilo dos inputs */
+input {
+    width: 100%; /* Largura total */
+    padding: 12px; /* Aumentar o padding */
+    margin: 10px 0; /* Margem vertical */
+    border: 1px solid #ccc; /* Borda */
+    border-radius: 4px; /* Arredondar bordas */
+    box-sizing: border-box; /* Inclui padding e borda na largura total */
+}
+
+/* Estilo dos botões */
+button {
+    width: 100%; /* Largura total */
+    padding: 12px; /* Aumentar o padding */
+    background-color: #4CAF50; /* Cor de fundo do botão */
+    color: white; /* Cor do texto */
+    border: none; /* Sem borda */
+    border-radius: 4px; /* Arredondar bordas */
+    cursor: pointer; /* Cursor de ponteiro */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+button:hover {
+    background-color: #45a049; /* Cor ao passar o mouse */
+}
+
+/* Listas */
+.numbers-grid, #reservationsListByNumber, #reservationsListByDate {
+    list-style-type: none; /* Remove marcadores */
+    padding: 0; /* Remove padding */
+    margin: 20px 0; /* Margem superior e inferior */
+}
+
+/* Estilo dos itens da lista */
+.numbers-grid li, 
+#reservationsListByNumber li, 
+#reservationsListByDate li {
+    padding: 10px; /* Padding interno */
+    margin: 5px 0; /* Margem vertical */
+    background-color: #f9f9f9; /* Cor de fundo dos itens */
+    border: 1px solid #ddd; /* Borda */
+    border-radius: 4px; /* Arredondar bordas */
+    transition: background-color 0.3s; /* Transição suave */
+}
+
+/* Efeitos de hover nos itens da lista */
+.numbers-grid li:hover, 
+#reservationsListByNumber li:hover, 
+#reservationsListByDate li:hover {
+    background-color: #e0e0e0; /* Cor ao passar o mouse */
+}
+
+/* Estilo do grid de números */
+.numbers-grid {
+    display: grid; /* Usar grid */
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Colunas responsivas */
+    gap: 10px; /* Espaçamento entre quadrados */
+}
+
+/* Para esconder o formulário de reserva inicialmente */
+#reservationForm {
+    display: none; /* Esconde o formulário */
+}
+
+/* Estilos para spans */
+span {
+    color: blue; /* Cor do texto */
+    cursor: pointer; /* Cursor de ponteiro */
+}
+
+span:hover {
+    text-decoration: underline; /* Sublinha ao passar o mouse */
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px; /* Ajustar o padding em telas menores */
+    }
+
+    input {
+        padding: 10px; /* Ajustar padding dos inputs */
+    }
+
+    button {
+        padding: 10px; /* Ajustar padding dos botões */
+    }
+}
+
+@media (max-width: 480px) {
+    .numbers-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas em telas muito pequenas */
+    }
+}

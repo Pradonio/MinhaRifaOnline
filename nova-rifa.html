@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Nova Rifa</title>
+    <link rel="stylesheet" href="style.css"> <!-- Adicione seu CSS aqui -->
+    <script type="module" src="firebase-config.js"></script> <!-- Adiciona a configuração do Firebase -->
+</head>
+<body>
+    <div>
+        <h1 id="formTitle">Cadastrar Nova Rifa</h1>
+        <form id="raffleForm">
+            <label for="raffleName">Nome da Rifa:</label>
+            <input type="text" id="raffleName" required><br>
+
+            <label for="raffleDescription">Descrição (opcional):</label>
+            <textarea id="raffleDescription"></textarea><br>
+
+            <label for="raffleValue">Valor do Número:</label>
+            <input type="text" id="raffleValue" required><br>
+
+            <label for="raffleQuantity">Quantidade de Números (máx. 150):</label>
+            <input type="number" id="raffleQuantity" min="1" max="150" required><br>
+
+            <label for="raffleImage">Upload da Foto do Prêmio (opcional):</label>
+            <input type="file" id="raffleImage" accept="image/*"><br>
+
+            <label for="raffleExpiry">Data de Expiração:</label>
+            <input type="date" id="raffleExpiry"><br>
+            <label>
+                <input type="checkbox" id="noExpiry">
+                Manter a Rifa sem Data de Expiração
+            </label><br>
+
+            <button type="submit" id="saveRaffleBtn">Salvar Nova Rifa</button>
+        </form>
+    </div><br>
+    
+    <button id="backBtn">Voltar para Home</button>
+
+    <script type="module">
+        import { db } from './firebase-config.js'; // Importa o Firestore da configuração do Firebase
+        import { collection, addDoc, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore.js';
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const raffleId = urlParams.get('id'); // Obtém o ID da rifa da URL
+
+        if (raffleId) {
+            document.getElementById('formTitle').innerText = 'Editar Rifa'; // Muda o título do formulário
+            loadRaffleData(raffleId); // Carrega os dados da rifa para edição
+        }
+
+        // Função para carregar os dados da rifa
+        async function loadRaffleData(id) {
+            const raffleRef = doc(db, 'rifas', id);
+            const raffleSnap = await getDoc(raffleRef);
+            if (raffleSnap.exists()) {
+                const data = raffleSnap.data();
+                document.getElementById('raffleName').value = data.name;
+                document.getElementById('raffleDescription').value = data.description || '';
+                document.getElementById('raffleValue').value = (data.value * 100).toFixed(2); // Converte para centavos
+                document.getElementById('raffleQuantity').value = data.quantity;
+                document.getElementById('raffleExpiry').value = data.expiryDate || '';
+                document.getElementById('noExpiry').checked = !data.expiryDate; // Marca o checkbox se não houver data
+            } else {
+                console.error('Rifa não encontrada');
+            }
+        }
+
+        document.getElementById('raffleForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Evitar o envio padrão do formulário
+            
+            const raffleName = document.getElementById('raffleName').value.trim();
+            const raffleDescription = document.getElementById('raffleDescription').value.trim();
+            const raffleValue = document.getElementById('raffleValue').value.trim().replace(/\D/g, ''); // Remove caracteres não numéricos
+            const raffleQuantity = parseInt(document.getElementById('raffleQuantity').value);
+            const raffleExpiry = document.getElementById('raffleExpiry').value;
+            const noExpiry = document.getElementById('noExpiry').checked;
+
+            // Se a opção de sem data for escolhida, deixe raffleExpiry como null
+            const expiryDate = noExpiry ? null : raffleExpiry;
+
+            try {
+                if (raffleId) {
+                    // Atualiza rifa existente
+                    await updateRaffle(raffleId, {
+                        name: raffleName,
+                        description: raffleDescription,
+                        value: parseFloat(raffleValue) / 100, // Converte de centavos para valor
+                        quantity: raffleQuantity,
+                        expiryDate: expiryDate,
+                    });
+                    alert('Rifa atualizada com sucesso!');
+                } else {
+                    // Adiciona nova rifa
+                    await addDoc(collection(db, 'rifas'), {
+                        name: raffleName,
+                        description: raffleDescription,
+                        value: parseFloat(raffleValue) / 100, // Converte de centavos para valor
+                        quantity: raffleQuantity,
+                        expiryDate: expiryDate,
+                        createdAt: new Date().toISOString(), // Adiciona data e hora de criação
+                    });
+                    alert('Rifa cadastrada com sucesso!');
+                }
+
+                document.getElementById('raffleForm').reset(); // Limpa o formulário
+                window.location.href = 'home.html'; // Redireciona para a página home após a criação ou atualização da rifa
+            } catch (error) {
+                console.error('Erro ao salvar rifa:', error.message);
+                alert('Erro ao salvar rifa: ' + error.message);
+            }
+        });
+
+        document.getElementById('backBtn').addEventListener('click', function() {
+            window.location.href = 'home.html'; // Redireciona para a página home
+        });
+
+        // Função para atualizar a rifa
+        async function updateRaffle(id, raffleData) {
+            const raffleRef = doc(db, 'rifas', id);
+            await setDoc(raffleRef, raffleData, { merge: true });
+        }
+    </script>
+</body>
+</html>

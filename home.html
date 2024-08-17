@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Rifas</title>
+    <link rel="stylesheet" href="style.css"> <!-- Adicione seu CSS aqui -->
+    <script type="module" src="firebase-config.js"></script> <!-- Configuração do Firebase -->
+    <script type="module" src="home.js" defer></script> <!-- Inclui o home.js -->
+</head>
+<body>
+    <h1>Bem-vindo à Home</h1>
+    
+    <!-- Botão para cadastrar nova rifa -->
+    <button id="newRaffleBtn">Cadastrar Nova Rifa</button>
+
+    <h2>Lista de Rifas Criadas</h2>
+    <ul id="raffleList"></ul> <!-- Lista onde as rifas serão exibidas -->
+
+    <script type="module">
+        // Este script é removido pois a função loadRaffles() agora está sendo chamada no home.js
+    </script>
+</body>
+</html>
